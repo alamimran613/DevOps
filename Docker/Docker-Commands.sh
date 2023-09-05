@@ -57,4 +57,19 @@ docker port con1
 # 15. Check Docker Networks
 docker network ls
 
-# 16. 
+# 16. Check Your Own IP
+hostname -I
+
+# 17. Create Docker Network
+docker network create mynetwork
+
+# 18. Create container with own network
+docker run -i -d --name con1 --network mynetwork ubuntu
+
+# 19. Create Container with Host Machine Network - If we use this then we no need to expose or publish port. This will use ports and IP address of our own host machine, Any app expose any port then it will be exposed automatic on host machine.
+docker run -i -d --name con1 --network host ubuntu
+
+# 20. Create Container without network access - This will restrict any kind of Networking
+docker run -i -d --name con1 --network none ubuntu
+
+
