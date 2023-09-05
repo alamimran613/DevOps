@@ -72,4 +72,5 @@ docker run -i -d --name con1 --network host ubuntu
 # 20. Create Container without network access - This will restrict any kind of Networking
 docker run -i -d --name con1 --network none ubuntu
 
-
+# 21. Connect own network with container - When it connect then we can ping using container name
+docker connect mynetwork con1
