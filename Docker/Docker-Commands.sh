@@ -1,3 +1,5 @@
+################ Basic Container Commands for Container Start/stop/run ##############
+
 # 1. Search Docker Images from Docker Hub on Terminal
 docker search <image name>
 
@@ -15,17 +17,44 @@ docker info
 # 5. Check Running Containers - ps means Process Status
 docker ps 
 
-# 6. Start container without going inside
+# 6. Login into container - This will start new process in the container's environment (PID)
+docker exec -it <container name> /bin/bash
+
+# 7. Login into Running container - This will just connect the standard Input/Output of the main process inside container to corresponding standard Input/Output error of current terminal. 
+docker attach container-1
+
+# 8. Start container without going inside
 docker run -i -d --name con1 -p 100:80 ubuntu 
 
-# 7. Create Dockerfile
+########################## Dockerfile #######################################
+
+# 9. Create Dockerfile
 nano Dockerfile
 
-# 8. Create Image using Dockerfile
+# 10. Create Image using Dockerfile
 docker build -t <Image Name> .
 # Ex - docker build -t alamimran613/image .
 
-# 9. Login into container
-docker exec -it <container name> /bin/bash
+############################### Volume ######################################
 
-# 10. 
+# 11. Share volume with another container from source container
+# If con1 has volume then when we create con2 then con1 volume share with con2
+docker run -it --name <New container name> --privileged=true --volumes-from <Container name that contains volume> <image name> /bin/bash
+# Ex - docker run -it --name con2 --privileged=true --volumes-from con1 ubuntu /bin/bash
+
+# 12. Create container with volume without Dockerfile, With command line
+docker run -it --name con3 -v /volume2 ubuntu /bin/bash
+
+# 13. Map Host machine directory to container
+docker run -it --name con1 -v /home/ec2-user:/volume --privileged=true ubuntu /bin/bash
+# Here (/home/ec2-user directory is host machine directory):(/volume is container directory where host's machine given directory will be mapped) 
+
+######################## Networking ##########################################
+
+# 14. Check exposed ports by container
+docker port con1
+
+# 15. Check Docker Networks
+docker network ls
+
+# 16. 
