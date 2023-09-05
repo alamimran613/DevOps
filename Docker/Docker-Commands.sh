@@ -18,4 +18,14 @@ docker ps
 # 6. Start container without going inside
 docker run -i -d --name con1 -p 100:80 ubuntu 
 
-# 7. 
+# 7. Create Dockerfile
+nano Dockerfile
+
+# 8. Create Image using Dockerfile
+docker build -t <Image Name> .
+# Ex - docker build -t alamimran613/image .
+
+# 9. Login into container
+docker exec -it <container name> /bin/bash
+
+# 10. 

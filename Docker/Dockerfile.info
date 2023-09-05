@@ -1,0 +1,10 @@
+FROM		- For base image. This command myst be on the top on the Dockerfile
+RUN     	- To execute commands, It will create a layer in image
+MAINTAINER	- Author/Owner/Description
+COPY		- Copy files form local system. We need to provide source, destination (We can't download file from internet)
+ADD		- Similar to copy but it provide feature to download files from internet, also we extract file at docker image side
+EXPOSE		- To expose ports such as 8080, 80 etc.
+WORKDIR		- To set working directory when we login into container it will we open
+CMD		- Execute commands but during container create
+ENTRYPOINT	- Similar to CMD but has higher priority over CMD, This will execute first then CMD will be execute
+ENV		- To set environment variable
