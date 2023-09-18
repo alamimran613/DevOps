@@ -1,5 +1,5 @@
 ## List all Branch
-```
+```bash
 git branch
 ```
 
