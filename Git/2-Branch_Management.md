@@ -1,7 +1,5 @@
 ## List all Branch
-```bash
-git branch
-```
+```bash git branch ```
 
 ## Create Git Branch
 git branch <Branch Name>
