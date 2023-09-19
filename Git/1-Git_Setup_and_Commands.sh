@@ -62,3 +62,9 @@ git remote remove origin
 cat > .gitignore
 *.css
 *.java
+
+## Move File from staging area to working directory
+git reset
+
+## Remove Files from Working Area and Staging Area
+git reset --hard

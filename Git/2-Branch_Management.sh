@@ -19,4 +19,9 @@ git branch -D test_branch
 
 # Note: This command is used to forcefully delete a branch named test_branch, regardless of whether it has been fully merged or not. It's useful when you want to delete a branch, even if it contains unmerged changes. Be cautious when using this command because it can result in the loss of unmerged work.
 
-##
+## Merge Branch
+git merge <Branch Name>
+git merge test_branch
+
+# Note: We use pulling machanism to merge branch. If we want to merge test_branch with master branch then stay in master branch then use above command. This will also merge commit details. "git log" for check Ex - If we want to merge Branch B with Branch A then stay in branch A and use command "git merge B". This will use pulling machanism so we pull branch code
+
