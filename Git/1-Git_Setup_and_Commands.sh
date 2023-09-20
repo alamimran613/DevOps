@@ -68,3 +68,7 @@ git reset
 
 ## Remove Files from Working Area and Staging Area
 git reset --hard
+
+## Delete untracked file
+git clean -n (This will show which files will be removed, When confirm then use below command)
+git clean -f (Force Fully - This will not ask for confirmation)

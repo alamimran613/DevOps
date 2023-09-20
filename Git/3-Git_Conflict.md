@@ -1,5 +1,5 @@
 # Git Conflict
-When we merge two branch and `Branch-1` and `Branch-2` have same name file like `File1` and `File1` and `File2` data are not similar then `Git Conflict` occur. Git will merge branches
+When we merge two branch and `Branch-1` and `Branch-2` have same name file like `File1` and `File1` and `File1 of Branch-2` data are not similar then `Git Conflict` occur. Git will merge branches
 
 ## Solve Git Conflict
 Goto file and open file reorder lines as per your need then commit the changes.
