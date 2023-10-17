@@ -40,4 +40,3 @@ chef generate recipe new-recipe
 nano recipes/webserver.rb
 chef exec ruby -c recipes/webserver.rb
 chef-client -zr "recipe[new-cookbook::webserver]"
-
