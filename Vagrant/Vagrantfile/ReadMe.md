@@ -1,5 +1,3 @@
- **# README.md**
-
 **Important Note:**
 
 **All file modifications and configurations must be made within the Vagrantfile.**
