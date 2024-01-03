@@ -70,7 +70,7 @@
    vagrant global-status
    ```
 
-11. **Remove Delete VMs Entry:**
+11. **Remove Deleted VMs Entry (If Showing and Does Not Exits):**
    ```bash
    vagrant global-status --prune
    ```
