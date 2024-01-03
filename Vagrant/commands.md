@@ -70,6 +70,11 @@
    vagrant global-status
    ```
 
+10. **Remove Delete VMs Entry:**
+   ```bash
+   vagrant global-status --prune
+   ```
+
 **Remember:**
 
 - Consult the official Vagrant documentation for detailed guidance and troubleshooting: [https://www.vagrantup.com/docs](https://www.vagrantup.com/docs): [https://www.vagrantup.com/docs](https://www.vagrantup.com/docs)
