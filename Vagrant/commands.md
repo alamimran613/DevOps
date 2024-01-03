@@ -31,7 +31,7 @@
 
 **Reloading Configurations and Reprovisioning:**
 
-5. **Apply Updates and Rerun Provisioners:**
+5. **Apply Updates and Rerun Provisioners (For Running VMs):**
    ```bash
    vagrant reload --provision
    ```
