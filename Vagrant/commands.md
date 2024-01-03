@@ -22,9 +22,14 @@
    vagrant halt
    ```
 
+4. **Forceful Shutdown (Emergency):**
+   ```bash
+   vagrant halt -f
+   ```
+
 **Reloading Configurations:**
 
-4. **Apply Updates:**
+5. **Apply Updates:**
    ```bash
    vagrant reload
    ```
@@ -32,14 +37,38 @@
 
 **Destroying the Virtual Machine:**
 
-5. **Complete Removal:**
+6. **Complete Removal:**
    ```bash
    vagrant destroy
    ```
 
 **Accessing the Virtual Machine:**
 
-6. **Connect via SSH:**
+7. **Connect via SSH:**
    ```bash
    vagrant ssh
    ```
+
+**Checking VM Status:**
+
+8. **Current VM Status:**
+   ```bash
+   vagrant status
+   ```
+
+9. **Global VM Status (All Projects):**
+   ```bash
+   vagrant global-status
+   ```
+
+**Remember:**
+
+- Consult the official Vagrant documentation for detailed guidance and troubleshooting: [https://www.vagrantup.com/docs](https://www.vagrantup.com/docs): [https://www.vagrantup.com/docs](https://www.vagrantup.com/docs)
+- For specific questions or assistance, reach out to the project's maintainers or community forums.
+
+**Additional Tips:**
+
+- Explore Vagrant plugins for enhanced functionality and automation.
+- Consider using version control for your Vagrantfile and project files for collaborative environments.
+- Stay updated with the latest Vagrant releases for security patches and improvements.
+
