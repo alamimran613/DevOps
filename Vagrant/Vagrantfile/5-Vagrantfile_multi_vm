@@ -1,0 +1,36 @@
+Vagrant.configure("2") do |config|
+  
+    # Configuration for web01 (Ubuntu 20.04)
+    config.vm.define "web01" do |web01|
+      web01.vm.box = "ubuntu/focal64"
+      web01.vm.hostname = "web01"
+      web01.vm.network "private_network", ip: "192.168.56.20"
+    end
+  
+    # Configuration for web02 (Ubuntu 20.04)
+    config.vm.define "web02" do |web02|
+      web02.vm.box = "ubuntu/focal64"
+      web02.vm.hostname = "web02"
+      web02.vm.network "private_network", ip: "192.168.56.21"
+    end
+  
+    # Configuration for db01 (CentOS 7) with provisioning
+    config.vm.define "db01" do |db01|
+      db01.vm.box = "centos/7"
+      db01.vm.hostname = "db01"
+      db01.vm.network "private_network", ip: "192.168.56.22"
+      
+      # Provisioning script for db01
+      db01.vm.provision "shell", inline: <<-SCRIPT
+        # Example: Install MySQL
+        sudo yum install -y mariadb-server wget zip unzip -y
+        systemctl start mariadb
+        systemctl enable mariadb
+      SCRIPT
+    end
+
+  # Public network configuration for all VMs
+  config.vm.network "public_network"
+  
+  end
+  
