@@ -98,3 +98,7 @@ docker tag myimage alamimran613/myimage
 # 28. Push Image to DockerHub
 docker push alamimran613/myimage
 
+# 29. Docker Prune
+docker system prune -a
+# command is used to remove all unused objects in your Docker environment, including stopped containers, unused volumes, and networks. The -a flag is used to remove all unused objects, not just the ones created by the docker system command. This command is helpful to reclaim disk space on your system by cleaning up resources that are no longer in use.
+
