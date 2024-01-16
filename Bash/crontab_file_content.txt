@@ -1,0 +1,9 @@
+use below command
+
+crontab -e
+
+copy below content and paste into crontab file
+
+
+# MM HH DOM mm DOW command
+* * * * * /opt/scripts/11_monit.sh &>> /var/log/monit_httpd.log

@@ -1,0 +1,3 @@
+For loop runs for a sequence
+
+While loop runs for a condition
