@@ -16,5 +16,7 @@
 
 6. **Convention over Configuration:** Maven follows the principle of convention over configuration. It enforces a standard directory structure and naming conventions for source code, resources, and output, reducing the need for extensive configuration.
 
-## To use Maven, developers typically create a POM file for their project, and then Maven can handle the entire build process based on the information provided in the POM. Maven simplifies project management, improves collaboration, and helps maintain consistency across projects.
+## Note:
+
+To use Maven, developers typically create a POM file for their project, and then Maven can handle the entire build process based on the information provided in the POM. Maven simplifies project management, improves collaboration, and helps maintain consistency across projects.
 
