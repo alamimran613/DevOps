@@ -1,66 +1,77 @@
-1. **`mvn clean`**
-   - *Purpose:* Cleans the target directory, removing compiled classes and other generated files.
-   - *Usage:* ```bash
-     mvn clean
-     ```
+1. **Initialize a new Maven project:**
+   
+   ```bash
+   mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+   ```
+   
+   This command creates a new Maven project using the quickstart archetype.
 
-2. **`mvn compile`**
-   - *Purpose:* Compiles the source code of the project.
-   - *Usage:* ```bash
-     mvn compile
-     ```
+2. **Compile the Maven project:**
 
-3. **`mvn test`**
-   - *Purpose:* Runs the tests of the project.
-   - *Usage:* ```bash
-     mvn test
-     ```
+   ```bash
+   mvn compile
+   ```
 
-4. **`mvn package`**
-   - *Purpose:* Packages the compiled code into a distributable format (e.g., JAR, WAR).
-   - *Usage:* ```bash
-     mvn package
-     ```
+   This command compiles the source code of the Maven project.
 
-5. **`mvn install`**
-   - *Purpose:* Installs the project's artifacts (e.g., JAR) into the local repository.
-   - *Usage:* ```bash
-     mvn install
-     ```
+3. **Run tests:**
 
-6. **`mvn deploy`**
-   - *Purpose:* Deploys the project's artifacts to a remote repository.
-   - *Usage:* ```bash
-     mvn deploy
-     ```
+   ```bash
+   mvn test
+   ```
 
-7. **`mvn clean install`**
-   - *Purpose:* Cleans the project, compiles the code, and installs artifacts into the local repository.
-   - *Usage:* ```bash
-     mvn clean install
-     ```
+   Executes the tests in the project.
 
-8. **`mvn clean package`**
-   - *Purpose:* Cleans the project and packages the compiled code.
-   - *Usage:* ```bash
-     mvn clean package
-     ```
+4. **Package the Maven project:**
 
-9. **`mvn dependency:tree`**
-   - *Purpose:* Displays the project's dependency tree.
-   - *Usage:* ```bash
-     mvn dependency:tree
-     ```
+   ```bash
+   mvn package
+   ```
 
-10. **`mvn help:effective-pom`**
-    - *Purpose:* Displays the effective POM (Project Object Model) after inheritance and property substitution.
-    - *Usage:* ```bash
-      mvn help:effective-pom
-      ```
+   This command packages the compiled code and resources into a distributable JAR or WAR file.
 
-11. **`mvn spring-boot:run`**
-    - *Purpose:* Starts the Spring Boot application.
-    - *Usage:* ```bash
-      mvn spring-boot:run
-      ```
-```
+5. **Install the Maven project artifacts to the local repository:**
+
+   ```bash
+   mvn install
+   ```
+
+   Installs the project artifacts (JAR, WAR) into the local Maven repository for use as a dependency in other projects.
+
+6. **Clean the Maven project:**
+
+   ```bash
+   mvn clean
+   ```
+
+   Deletes the `target` directory, which contains the compiled classes and generated artifacts.
+
+7. **Generate site documentation:**
+
+   ```bash
+   mvn site
+   ```
+
+   Generates the project's site documentation in the `target/site` directory.
+
+8. **Update Maven dependencies:**
+
+   ```bash
+   mvn dependency:resolve
+   ```
+
+   Downloads the project dependencies.
+
+9. **Display effective POM:**
+
+   ```bash
+   mvn help:effective-pom
+   ```
+
+   Shows the effective POM (Project Object Model) after inheritance and interpolation.
+
+10. **Create a Maven project without an archetype:**
+
+    ```bash
+    mvn archetype:generate -DgroupId=com.example -DartifactId=myproject -DinteractiveMode=false
+    ```
