@@ -1,0 +1,37 @@
+// This Jenkinsfile is for v-profile project for build vprofile-v2.war project
+
+pipeline {
+    agent any
+// Tools configured in Manage Jenkins > Tools with given names for maven MAVEN3 and for jdk OracleJDK11    
+    tools {
+        maven 'MAVEN3'
+        jdk 'OracleJDK11'
+    }
+
+    stages {
+        stage('Fetch Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/devopshydclub/vprofile-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn install -DskipTests'
+            }
+
+            post{
+                success{
+                    echo 'Archiving Artifacts Now'
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+        
+        stage('UNIT TESTS'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+    }
+}
