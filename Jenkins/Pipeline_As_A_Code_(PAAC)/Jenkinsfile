@@ -1,5 +1,14 @@
 // This Jenkinsfile is for v-profile project for build vprofile-v2.war project
 
+// Define Colour map for slack notifications
+
+def COLOR_MAP = [
+    'SUCCESS': 'good', 
+    'FAILURE': 'danger',
+]
+
+// Pipelline code stat from here
+
 pipeline {
     agent any
 // Tools configured in Manage Jenkins > Tools with given names for maven MAVEN3 and for jdk OracleJDK11    
@@ -33,5 +42,79 @@ pipeline {
                 sh 'mvn test'
             }
         }
+
+        stage('Checkstyle Analysis'){
+            steps {
+                sh 'mvn checkstyle:checkstyle'
+            }
+        }
+
+        stage('Sonar Analysis'){
+            environment {
+                scannerHome = tool 'sonar4.7'
+            }
+            steps {
+                withSonarQubeEnv('sonar'){
+                    sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
+                   -Dsonar.projectName=vprofile \
+                   -Dsonar.projectVersion=1.0 \
+                   -Dsonar.sources=src/ \
+                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+                }
+            }
+        }
+
+// Checking code quality in SonarQube, Make sure to create quality gate in sonar qube in project section
+// Below code will auto check with selected quality gate in sonar qube server
+
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+// Upload artifact to Nexus OSS repository, make sure to create maven2 hosted repo in nexus 
+// Add nexus credentials in jenkins > manage credential and add username and password of nexus
+       
+        stage("UploadArtifact"){
+            steps{
+                nexusArtifactUploader(
+                  nexusVersion: 'nexus3',
+                  protocol: 'http',
+                  nexusUrl: '172.31.84.211:8081',
+                  groupId: 'QA',
+                  version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                  repository: 'vprofile-repo',
+                  credentialsId: 'nexuslogin',
+                  artifacts: [
+                    [artifactId: 'vproapp',
+                     classifier: '',
+                     file: 'target/vprofile-v2.war',
+                     type: 'war']
+                    ]
+                )
+            }
+        }
     }
+
+// This is post build message and this will outside of stages, First create account on slack and install slack plugin
+// Configure slack in manage jenkins > system > slack 
+// This is slack notification
+
+    post {
+        always {
+            echo 'Slack Notifications.'
+            slackSend channel: '#jenkinscicd',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+        }
+    }
+        
 }
