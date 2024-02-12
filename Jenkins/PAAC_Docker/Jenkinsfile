@@ -12,6 +12,10 @@ pipeline {
         registryCredential = 'ecr:us-east-1:awscreds'
         appRegistry = "928106335609.dkr.ecr.us-east-1.amazonaws.com/vprofileappimg"
         vprofileRegistry = "https://928106335609.dkr.ecr.us-east-1.amazonaws.com"
+
+        // Add enviroment variable for Amazon ECS for deployment on ECS
+        cluster = "vprofileECSCluster"
+        service = "vprofile-app-service"
     }
     
   stages {
@@ -87,6 +91,16 @@ pipeline {
               }
             }
           }
+     }
+      
+      // Depoyment to ECS using aws cli command
+      // Install plugin Pipeline: AWS Steps in jenkins
+     stage('Deploy to ecs') {
+          steps {
+        withAWS(credentials: 'awscreds', region: 'us-east-1') {
+          sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
+        }
+      }
      }
 
   }
