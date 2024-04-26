@@ -1,0 +1,46 @@
+---
+# Playbook to set up database servers with MariaDB and create a new database and user
+# Playbook based variable example
+# Play: DBServer Setup
+- name: DBServer Setup
+  hosts: dbservers  # Targeting hosts in the 'dbservers' group
+  become: yes  # Execute tasks with elevated privileges
+  vars:
+    dbname: electric # Define variable database name
+    dbuser: current  # Define variable database user
+    dbpass: tesla    # Define variable database password
+  tasks:
+    # Task to install MariaDB Server
+    - name: Install mariadb-server
+      ansible.builtin.yum:
+        name: mariadb-server  # Package name
+        state: present  # Ensure the package is present
+
+    # Task to install Python PyMySQL library
+    - name: Install PyMySQL library
+      ansible.builtin.yum:
+        name: python3-PyMySQL  # Package name
+        state: present  # Ensure the package is present
+
+    # Task to start the MariaDB service
+    - name: Start MariaDB Service
+      ansible.builtin.service:
+        name: mariadb  # Service name
+        state: started  # Ensure the service is started
+        enabled: yes  # Ensure the service is enabled to start on boot
+
+    # Task to create a new database with name 'accounts'
+    - name: Create a new database with name 'accounts'
+      community.mysql.mysql_db:
+        name: "{{dbname}}"  # Database name
+        state: present  # Ensure the database exists
+        login_unix_socket: /var/lib/mysql/mysql.sock  # Unix socket file to connect to the MariaDB server
+
+    # Task to create database user with name 'vprofile'
+    - name: Create database user with name 'vprofile'
+      community.mysql.mysql_user: # MySQL user management module
+        name: "{{dbuser}}" # User name
+        password: "{{dbpass}}" # Password for the user
+        priv: '*.*:ALL' # Privileges for the user (all privileges on all databases and tables)
+        state: present  # Ensure the user exists
+        login_unix_socket: /var/lib/mysql/mysql.sock # Unix socket file to connect to the MariaDB server

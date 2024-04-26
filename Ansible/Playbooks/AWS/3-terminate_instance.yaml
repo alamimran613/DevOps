@@ -1,0 +1,9 @@
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    # Terminate ec2-instance
+    - name: Terminate an instance
+      amazon.aws.ec2_instance:
+        name: "public-compute-instance"
+        region: ap-south-1
+        state: absent

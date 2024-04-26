@@ -1,0 +1,36 @@
+---
+# Playbook to set up web servers and database servers
+
+# Play 1: Webserver Setup
+- name: Webserver Setup
+  hosts: webservers  # Targeting hosts in the 'webservers' group
+  become: yes  # Execute tasks with elevated privileges
+
+  tasks:
+    - name: Install httpd  # Task to install Apache HTTP Server
+      ansible.builtin.yum:
+        name: httpd  # Package name
+        state: present  # Ensure the package is present
+
+    - name: Start Service  # Task to start the httpd service
+      ansible.builtin.service:
+        name: httpd  # Service name
+        state: started  # Ensure the service is started
+        enabled: yes  # Ensure the service is enabled to start on boot
+
+# Play 2: DBServer Setup
+- name: DBServer Setup
+  hosts: dbservers  # Targeting hosts in the 'dbservers' group
+  become: yes  # Execute tasks with elevated privileges
+
+  tasks:
+    - name: Install mariadb-server  # Task to install MariaDB Server
+      ansible.builtin.yum:
+        name: mariadb-server  # Package name
+        state: present  # Ensure the package is present
+
+    - name: Start MariaDB Service  # Task to start the MariaDB service
+      ansible.builtin.service:
+        name: mariadb  # Service name
+        state: started  # Ensure the service is started
+        enabled: yes  # Ensure the service is enabled to start on boot

@@ -1,0 +1,7 @@
+# Playbook to provision servers and configure NTP agent
+# Invenroy 4 will be used
+- name: Provisioning Servers
+  hosts: all
+  become: yes
+  roles:
+    - post-install

@@ -1,0 +1,32 @@
+all:
+  hosts:
+    web01:  # This is web01 host
+      ansible_host: 172.31.15.65
+
+    web02:  # This is web02 host
+      ansible_host: 172.31.10.107
+
+    web03:  # This is web02 host
+      ansible_host: 172.31.33.140
+      ansible_user: ubuntu
+    db01:  # This is db01 host
+      ansible_host: 172.31.15.83
+
+  children: # Creating Groups
+    webservers: # webserver group
+      hosts:
+        web01:  # Adding web01 to webservers group
+        web02:  # Adding web02 to webservers group
+        web03:  # Adding web03 to webservers group
+
+    dbservers: # dbserver group
+      hosts:
+        db01:  # Adding db01 to dbservers group
+
+    dc_oregon: # This is parent group of webservers and dbservers
+      children:
+        webservers:
+        dbservers:
+      vars: # Variables specific to the dc_oregon group
+        ansible_user: ec2-user
+        ansible_ssh_private_key_file: clientkey.pem

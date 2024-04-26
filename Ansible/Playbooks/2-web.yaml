@@ -1,0 +1,28 @@
+---
+# Playbook to set up web servers and deploy a custom index.html file
+
+# Play 1: Webserver Setup
+- name: Webserver Setup
+  hosts: webservers  # Targeting hosts in the 'webservers' group
+  become: yes  # Execute tasks with elevated privileges
+
+  tasks:
+    # Task to install Apache HTTP Server
+    - name: Install httpd
+      ansible.builtin.yum:
+        name: httpd  # Package name
+        state: present  # Ensure the package is present
+
+    # Task to start the httpd service
+    - name: Start Service
+      ansible.builtin.service:
+        name: httpd  # Service name
+        state: started  # Ensure the service is started
+        enabled: yes  # Ensure the service is enabled to start on boot
+
+    # Task to copy the custom index.html file
+    - name: Copy index file
+      copy:
+        src: /home/ubuntu/project/exercise6/index.html  # Source path of the custom index.html file
+        dest: /var/www/html/index.html  # Destination path on the target hosts
+        backup: yes  # Create a backup if the destination file already exists, This will create a backup with timestamp on target machine

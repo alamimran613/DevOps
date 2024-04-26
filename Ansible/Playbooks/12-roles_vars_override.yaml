@@ -1,0 +1,12 @@
+# Playbook to provision servers and configure NTP agent
+# usvenroy 4 will be used
+- name: Provisioning Servers
+  hosts: all
+  become: yes
+  roles:
+    - role: post-install
+      vars:
+        ntp0: 0.us.pool.ntp.org
+        ntp1: 1.us.pool.ntp.org
+        ntp2: 2.us.pool.ntp.org
+        ntp3: 3.us.pool.ntp.org

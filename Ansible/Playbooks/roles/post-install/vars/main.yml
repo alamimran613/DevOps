@@ -1,0 +1,9 @@
+---
+# vars file for post-install
+USRNM: commonuser
+COMM: Variable from group_vars all
+ntp0: 0.in.pool.ntp.org
+ntp1: 1.in.pool.ntp.org
+ntp2: 2.in.pool.ntp.org
+ntp3: 3.in.pool.ntp.org
+mydir: /opt/dir22

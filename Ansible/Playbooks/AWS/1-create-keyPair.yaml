@@ -1,0 +1,19 @@
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Create Key Pair
+      amazon.aws.ec2_key:
+        name: sample
+        region: ap-south-1
+      register: keyout
+
+  # This will use for print key on terminal
+    # - name: print key  
+    #   debug:
+    #     var: keyout
+    
+    - name: Save key
+      copy:
+        content: "{{keyout.key.private_key}}"
+        dest: ./sample.pem
+      when: keyout.changed == True

@@ -1,0 +1,20 @@
+---
+- name: Print Facts
+  hosts: all
+  #gather_facts: False  # This will stop gathering facts of remote host
+  tasks: 
+    - name: Print OS Name
+      debug:
+        var: ansible_distribution
+    
+    - name: Print selinux mode
+      debug:
+        var: ansible_selinux.mode
+    
+    - name: Print Free Memory
+      debug:
+        var: ansible_memory_mb.real.free
+    
+    - name: Print Processor
+      debug:
+        var: ansible_processor[2] # Variable value in JSON List format so we use this for 3rd result show and above is in key value pair

@@ -1,0 +1,51 @@
+---
+# Playbook for Provisioning Servers
+
+# This playbook installs and configures the NTP (Network Time Protocol) agent on CentOS and Ubuntu servers.
+
+- name: Provisioning Servers
+  hosts: all
+  become: yes
+  tasks:
+    # Task to install NTP Agent on CentOS
+    - name: Install NTP Agent on CentOS
+      yum:
+        name: "{{item}}"
+        state: present
+      when: ansible_distribution == "CentOS"   # Condition to run this task only on CentOS hosts
+      loop:
+        - chrony
+        - wget
+        - git
+        - zip
+        - unzip
+
+    # Task to install NTP Agent on Ubuntu
+    - name: Install NTP Agent on Ubuntu
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes   # Update the package cache before installing
+      when: ansible_distribution == "Ubuntu"   # Condition to run this task only on Ubuntu hosts
+      loop:
+        - ntp
+        - wget
+        - git
+        - zip
+        - unzip
+
+    # Task to start the NTP service on CentOS
+    - name: Start Service on CentOS
+      service:
+        name: chronyd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"   # Condition to run this task only on CentOS hosts
+
+    # Task to start the NTP service on Ubuntu
+    - name: Start Service on Ubuntu
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Ubuntu"   # Condition to run this task only on Ubuntu hosts
