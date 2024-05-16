@@ -1,2 +1,0 @@
-FROM ubuntu
-RUN echo "Hi my name is imran" > /tmp/testfile

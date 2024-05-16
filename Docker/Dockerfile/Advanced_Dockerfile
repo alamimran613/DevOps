@@ -1,0 +1,7 @@
+FROM ubuntu
+WORKDIR /tmp
+RUN echo "Imran is awesome" > /tmp/testfile
+ENV myname imran
+COPY testfile1 /tmp
+ADD test.tar.gz /tmp
+
