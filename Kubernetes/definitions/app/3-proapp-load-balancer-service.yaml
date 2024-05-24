@@ -1,0 +1,14 @@
+# Defines a Kubernetes Service named hello-world-service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-service  # The name of the Service
+spec:
+  ports:
+  - port: 80                  # Exposes port 80 on the Service
+    targetPort: vproapp-port  # Specifies the nodePort to expose on each node (assuming this is a variable)
+    protocol: TCP             # Defines the protocol used for the Service (TCP in this case)
+  selector:                   # Specifies which Pods the Service should route traffic to
+    app: vproapp              # Selects Pods labeled with app=vproapp
+  type: LoadBalancer          # Specifies the type of Service (LoadBalancer in this case)

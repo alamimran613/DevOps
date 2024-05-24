@@ -53,19 +53,20 @@ kops version
 nslookup -type=ns kubevpro.imranalam.xyz
 
 # Create Configuration of Cluter and store it to S3 bucket
-kops create cluster --name=kubevpro.imranalam.xyz \ 
---state=s3://kubernets-kops-imran --zones=us-east-2a,us-east-2b \ 
---node-count=2 --node-size=t3.small --master-size=t3.medium --dns-zone=kubevpro.imranalam.xyz \ 
+kops create cluster --name=kubevpro.imranalam.xyz \
+--state=s3://kubernetes-kops-imran --zones=ap-south-1a,ap-south-1b \
+--node-count=2 --node-size=t3.small --master-size=t3.medium --dns-zone=kubevpro.imranalam.xyz \
 --node-volume-size=8 --master-volume-size=8
 
 # Create Cluster
-kops update cluster --name kubevpro.imranalam.xyz --state=s3://kubernets-kops-imran --yes --admin
+kops update cluster --name kubevpro.imranalam.xyz --state=s3://kubernetes-kops-imran --yes --admin
 
 # Validate Cluster
-kops validate cluster --state=s3://kubernets-kops-imran
+kops validate cluster --state=s3://kubernetes-kops-imran
 
 # Delete Cluster
-kops delete cluster --name kubevpro.imranalam.xyz --state=s3://kubernets-kops-imran --yes --admin
+kops delete cluster --name kubevpro.imranalam.xyz --state=s3://kubernetes-kops-imran --yes #--admin
+# Note: If we do not mention --yes then it will show all resources need to delete
 
 # Check kubectl config file, This file is use to let kubectl connect to cluster
 cat ~/.kube/config

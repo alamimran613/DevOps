@@ -23,7 +23,7 @@ kubectl create ns kubekart
 # Create pod in specific namespace
 kubectl run nginx1 --image=nginx -n kubekart
 
-# Create pod using yaml file with namespace
+# Create pod using defination yaml file with namespace
 nano pod1.yaml Follow this file > [](./pod1.yaml)
 kubectl apply -f pod1.yaml
 
@@ -32,3 +32,9 @@ kubectl get pod -n kubekart
 
 # Delete namespace
 kubectl delete ns kubekart
+
+# Setting the namespace preference, You can permanently save the namespace for all subsequent kubectl commands in that context.
+kubectl config set-context --current --namespace=<insert-namespace-name-here>
+
+# Validate it
+kubectl config view --minify | grep namespace:

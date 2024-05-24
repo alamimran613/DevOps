@@ -1,0 +1,15 @@
+# Defines a Kubernetes Pod named vproapp
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vproapp             # The name of the Pod
+  labels:
+    app: vproapp           # Labels the Pod with app=vproapp
+spec:
+  containers:
+    - name: appcontainer   # Defines a container named appcontainer
+      image: imranvisualpath/freshtomapp:V7  # Specifies the container image
+      ports:
+        - name: vproapp-port  # Defines a port named vproapp-port
+          containerPort: 8080  # Exposes port 8080 within the container

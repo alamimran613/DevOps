@@ -1,0 +1,15 @@
+# Defines a Kubernetes Service named hello-world-service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-service  # The name of the Service
+spec:
+  ports:
+  - port: 8090               # Exposes port 8090 on the Service
+    nodePort: 30001          # Specifies the nodePort to expose on each node
+    targetPort: 8080         # Forwards traffic from port 8090 to port 8080 on Pods
+    protocol: TCP            # Defines the protocol used for the Service (TCP in this case)
+  selector:                   # Specifies which Pods the Service should route traffic to
+    app: vproapp             # Selects Pods labeled with app=vproapp
+  type: NodePort             # Specifies the type of Service (NodePort in this case)
