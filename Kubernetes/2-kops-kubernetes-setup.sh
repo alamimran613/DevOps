@@ -58,6 +58,9 @@ kops create cluster --name=kubevpro.imranalam.xyz \
 --node-count=2 --node-size=t3.small --master-size=t3.medium --dns-zone=kubevpro.imranalam.xyz \
 --node-volume-size=8 --master-volume-size=8
 
+# List Cluster
+kops get cluster --state=s3://kubernetes-kops-imran
+
 # Create Cluster
 kops update cluster --name kubevpro.imranalam.xyz --state=s3://kubernetes-kops-imran --yes --admin
 

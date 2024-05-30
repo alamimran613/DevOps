@@ -1,0 +1,63 @@
+apiVersion: kops.k8s.io/v1alpha2
+kind: Cluster
+metadata:
+  creationTimestamp: "2024-05-30T09:34:44Z"
+  name: kubevpro.imranalam.xyz
+spec:
+  api:
+    dns: {}
+  authorization:
+    rbac: {}
+  channel: stable
+  cloudProvider: aws
+  configBase: s3://kubernetes-kops-imran/kubevpro.imranalam.xyz
+  dnsZone: kubevpro.imranalam.xyz
+  etcdClusters:
+  - cpuRequest: 200m
+    etcdMembers:
+    - encryptedVolume: true
+      instanceGroup: control-plane-ap-south-1a
+      name: a
+    memoryRequest: 100Mi
+    name: main
+  - cpuRequest: 100m
+    etcdMembers:
+    - encryptedVolume: true
+      instanceGroup: control-plane-ap-south-1a
+      name: a
+    memoryRequest: 100Mi
+    name: events
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  kubeProxy:
+    enabled: false
+  kubelet:
+    anonymousAuth: false
+  kubernetesApiAccess:
+  - 0.0.0.0/0
+  - ::/0
+  kubernetesVersion: 1.26.15
+  masterPublicName: api.kubevpro.imranalam.xyz
+  networkCIDR: 172.20.0.0/16
+  networking:
+    cilium:
+      enableNodePort: true
+  nonMasqueradeCIDR: 100.64.0.0/10
+  sshAccess:
+  - 0.0.0.0/0
+  - ::/0
+  subnets:
+  - cidr: 172.20.32.0/19
+    name: ap-south-1a
+    type: Public
+    zone: ap-south-1a
+  - cidr: 172.20.64.0/19
+    name: ap-south-1b
+    type: Public
+    zone: ap-south-1b
+  topology:
+    dns:
+      type: Public
+    masters: public
+    nodes: public
