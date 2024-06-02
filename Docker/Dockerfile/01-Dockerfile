@@ -1,0 +1,17 @@
+# Use the official Ubuntu base image
+FROM ubuntu
+
+# Set the working directory in the container
+WORKDIR /home/ubuntu
+
+# Update the package list
+RUN apt update
+
+# Create a file with the specified content, This run when building image
+RUN echo "Hi my name is Imran" > /home/ubuntu/testfile.txt
+
+# Copy a file from the host machine to the container
+COPY file_from_host_machine.txt /home/ubuntu/file_from_host_machine.txt
+
+# Specify the maintainer of this Dockerfile
+LABEL maintainer="Imran <https://www.linkedin.com/in/alamimran613/>"

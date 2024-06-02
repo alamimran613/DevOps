@@ -1,0 +1,20 @@
+# Use the official Ubuntu base image
+FROM ubuntu
+
+# Set the working directory in the container
+WORKDIR /home/ubuntu
+
+# Update the package list
+RUN apt update
+
+# Create a file with the specified content
+RUN echo "Hi my name is Imran" > /home/ubuntu/testfile.txt
+
+# Create a volume named 'my_volume' at '/volume' mount point.
+VOLUME /volume
+
+# Copy 'file_from_host_machine.txt' to '/volume' directory
+COPY file_from_host_machine.txt /volume/file_from_host_machine.txt
+
+# Specify the maintainer of this Dockerfile
+LABEL maintainer="Imran <https://www.linkedin.com/in/alamimran613/>"
